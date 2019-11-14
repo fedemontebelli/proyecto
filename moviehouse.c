@@ -18,13 +18,29 @@ void MasPopulares(Arreglo a){
 }
 
 void Inicializar(Lista *l){
-
+	l=malloc(sizeof(struct Nodo));
 }
 
-void Insertar(Lista *l){
-
+void Insertar(Lista *l, Movie a){
+	Lista *aux=malloc(sizeof(struct Nodo));
+	aux->head->pelicula=a;
+	aux->head->next=l->head->next;
+	l->head->next=aux->head;
 }
+
+void DeTxtALista(Lista *l, FILE *f){
+	archivo=fopen("C:\\Users\\Fede\\Desktop\\Proyecto Final","r");
+	if(archivo == NULL ) {
+    printf("No fue posible abrir el archivo\n");
+   }
+
+
+
+
+  fclose(archivo);
+}
+
 
 void MostrarLista(Lista l){
-	
+
 }
