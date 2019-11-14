@@ -18,11 +18,18 @@
 //Registro con informaciÃ³n de una pelicula
 // COMPLETAR CON LOS CAMPOS NECESARIOS
 typedef enum {Action, Comedy, Adventure, Drama, Horror, SciFi, Fantasy, Animation}Tgenero;
+typedef enum {Color, BW}Tcolor;
 typedef struct{
 	int id;
 	char titulo[100];
 	char director[35];
 	Tgenero genero;
+	int likes;
+	int cantidad_votantes;
+	int voto_promedio;
+	int anio;
+	int costo;
+	Tcolor color;
 }Movie;
 
 //LSE de Movie
