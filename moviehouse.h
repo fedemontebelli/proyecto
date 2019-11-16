@@ -17,20 +17,21 @@
 
 //Registro con informaciÃ³n de una pelicula
 // COMPLETAR CON LOS CAMPOS NECESARIOS
-typedef enum {Action, Comedy, Adventure, Drama, Horror, SciFi, Fantasy, Animation}Tgenero;
+enum generos {Action, Comedy, Adventure, Drama, Horror, SciFi, Fantasy, Animation};
 typedef enum {Color, BW}Tcolor;
 typedef struct{
-	int id;
+	char id[15];
 	char titulo[100];
 	char director[35];
-	Tgenero genero;
-	int likes;
-	int cantidad_votantes;
-	int voto_promedio;
-	int anio;
-	int costo;
+	enum generos genero;
+	char likes[10];
+	char cantidad_votantes[10];
+	char voto_promedio[5];
+	char anio[4];
+	char costo[15];
 	Tcolor color;
 }Movie;
+
 
 //LSE de Movie
 struct Nodo{
@@ -42,6 +43,9 @@ struct Nodo{
 typedef struct{
 	struct Nodo *head;
 }Lista;
+
+FILE *archivo;
+Lista *lista;
 
 //Arreglo de peliculas con cantidad
 typedef struct{
@@ -58,7 +62,7 @@ typedef struct{
 void Inicializar(Lista *l);
 
 //Inserta un nodo al comienzo de la lista
-void Insertar(Lista *l);
+void Insertar(Lista *l, Movie a);
 
 //Muestra toda la lista
 void MostrarLista(Lista l);
