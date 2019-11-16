@@ -31,6 +31,7 @@ void Insertar(Lista *l, Movie a){
 
 void DeTxtALista(Lista *l, FILE *f){
 	char auxGenero[15];
+	char auxColor[10];
 	Movie aux;
 	f=fopen("peliculas.txt","r");
 	if(f == NULL ) {
@@ -59,6 +60,16 @@ void DeTxtALista(Lista *l, FILE *f){
 									aux.genero=Animation;
 								}
 	fgets(aux.likes,(sizeof(aux.likes)), f);
+	fgets(aux.cantidad_votantes,(sizeof(aux.cantidad_votantes)), f);
+	fgets(aux.voto_promedio,(sizeof(aux.voto_promedio)), f);
+	fgets(aux.anio,(sizeof(aux.anio)), f);
+	fgets(aux.costo,(sizeof(aux.costo)), f);
+	fgets(auxColor,(sizeof(auxColor)), f);
+	if (strcmp(auxColor, "Color") == 0){
+			aux.color=Color;
+	}else if (strcmp(auxColor, "BW") == 0){
+				aux.color=BW;
+		}
 	Insertar(l, aux);
 
 
