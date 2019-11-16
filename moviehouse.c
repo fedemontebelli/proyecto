@@ -11,6 +11,7 @@
 #include "moviehouse.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 //AcciÃ³n que calcula y muestra cuales son las peliculas mas populares
 void MasPopulares(Arreglo a){
@@ -29,15 +30,39 @@ void Insertar(Lista *l, Movie a){
 }
 
 void DeTxtALista(Lista *l, FILE *f){
-	archivo=fopen("C:\\Users\\Fede\\Desktop\\Proyecto Final","r");
-	if(archivo == NULL ) {
+	char auxGenero[15];
+	Movie aux;
+	f=fopen("peliculas.txt","r");
+	if(f == NULL ) {
     printf("No fue posible abrir el archivo\n");
    }
 
+	fgets(aux.id, sizeof(aux.id), f); 
+	fgets(aux.titulo, sizeof(aux.titulo), f);
+	fgets(aux.director, sizeof(aux.director), f);
+	fgets(auxGenero,(sizeof(auxGenero)), f);
+	if (strcmp(auxGenero, "Action") == 0){
+			aux.genero=Action;
+	}else if (strcmp(auxGenero, "Comedy") == 0){
+				aux.genero=Comedy;
+		}else if (strcmp(auxGenero, "Adventure") == 0){
+				aux.genero=Adventure;
+			}else if (strcmp(auxGenero, "Drama") == 0){
+					aux.genero=Drama;
+				}else if (strcmp(auxGenero, "Horror") == 0){
+					aux.genero=Horror;
+					}else if (strcmp(auxGenero, "SciFi") == 0){
+						aux.genero=SciFi;
+						}else if (strcmp(auxGenero, "Fantasy") == 0){
+								aux.genero=Fantasy;
+							}else if (strcmp(auxGenero, "Animation") == 0){
+									aux.genero=Animation;
+								}
+	fgets(aux.likes,(sizeof(aux.likes)), f);
+	Insertar(l, aux);
 
 
-
-  fclose(archivo);
+  fclose(f);
 }
 
 
