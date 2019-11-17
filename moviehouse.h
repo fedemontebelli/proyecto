@@ -32,7 +32,6 @@ typedef struct{
 	Tcolor color;
 }Movie;
 
-
 //LSE de Movie
 struct Nodo{
 	Movie pelicula;
@@ -44,15 +43,14 @@ typedef struct{
 	struct Nodo *head;
 }Lista;
 
-FILE *archivo;
-Lista *lista;
-
 //Arreglo de peliculas con cantidad
 typedef struct{
 	 Movie peliculas[SIZE];
 	 int cant;
 }Arreglo;
 
+FILE *archivo;
+Lista *lista;
 
 /**
 	Operaciones sobre lista
