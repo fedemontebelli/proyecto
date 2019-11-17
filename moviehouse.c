@@ -19,15 +19,14 @@ void MasPopulares(Arreglo a){
 }
 
 void Inicializar(Lista *l){
-	l=malloc(sizeof(struct Nodo));
+	l=NULL;
 }
 
 void Insertar(Lista *l, Movie a){
-	Inicializar(l);
-	Lista *aux=malloc(sizeof(struct Nodo));
-	aux->head->pelicula=a;
-	aux->head->next=l->head->next;
-	l->head->next=aux->head;
+	struct Nodo *aux=malloc(sizeof(struct Nodo));
+	aux->pelicula=a;
+	aux->next=l->head->next;
+	l->head->next=aux;
 }
 
 void DeTxtALista(Lista *l, FILE *f){
