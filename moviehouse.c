@@ -23,6 +23,7 @@ void Inicializar(Lista *l){
 }
 
 void Insertar(Lista *l, Movie a){
+	Inicializar(l);
 	Lista *aux=malloc(sizeof(struct Nodo));
 	aux->head->pelicula=a;
 	aux->head->next=l->head->next;
