@@ -36,6 +36,7 @@ int main(){
 				break;
 			};
 			case 2: {
+				Inicializar(lista);
 				DeTxtALista(lista, archivo);
 				break;
 			}
