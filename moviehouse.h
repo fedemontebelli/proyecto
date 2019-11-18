@@ -17,19 +17,19 @@
 
 //Registro con informaciÃ³n de una pelicula
 // COMPLETAR CON LOS CAMPOS NECESARIOS
-enum generos {Action, Comedy, Adventure, Drama, Horror, SciFi, Fantasy, Animation};
-typedef enum {Color, BW}Tcolor;
+enum generos {Action=1, Comedy=2, Adventure=3, Drama=4, Horror=5, SciFi=6, Fantasy=7, Animation=8};
+enum colores{Color, BW};
 typedef struct{
-	char id[15];
-	char titulo[100];
-	char director[35];
+	int id;
+	char titulo[56];
+	char director[34];
 	enum generos genero;
-	char likes[10];
-	char cantidad_votantes[10];
-	char voto_promedio[5];
-	char anio[4];
-	char costo[15];
-	Tcolor color;
+	int likes;
+	int cantidad_votantes;
+	float voto_promedio;
+	int anio;
+	int costo;
+	enum colores color;
 }Movie;
 
 //LSE de Movie
@@ -57,21 +57,24 @@ Lista *lista;
 **/
 
 //Inicializa la lista
-void Inicializar(Lista *l);
+void Inicializar(Lista **l);
 
 //Inserta un nodo al comienzo de la lista
-void Insertar(Lista *l, Movie a);
+void Insertar(Lista **l, Movie a);
 
 //Muestra toda la lista
-void MostrarLista(Lista l);
+void MostrarLista(Lista *l);
 
 /**
 	Funcionalidades del proyecto
 **/
 
+void DeListaAArreglo();
+
+
 //Dado un archivo de texto con la informaciÃ³n de las peliculas, 
 //guarda en la lista todas las pelicuas usando el registro Movie
-void DeTxtALista(Lista *l, FILE *f);
+void DeTxtALista(Lista **l, FILE *f);
 
 //AcciÃ³n que calcula y muestra cuales son las peliculas mas populares
 void MasPopulares(Arreglo a);
