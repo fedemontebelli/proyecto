@@ -1,56 +1,37 @@
-// Copyright (C) 2019 <nombre y apellido del autor> <e-mail del autor>
-// This program is free software: you can redistribute it and/or modify it under
-// the terms of the GNU General Public License as published bythe Free Software
-// Foundation, either version 3 of the License, or at your option) any later version.
-// This program is distributed in the hope that it will be useful, but WITHOUT
-// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-// FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License along with
-// this program.  If not, see LICENSE.txt or <http://www.gnu.org/licenses/>.
-
 #include "moviehouse.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// #define new_max(a,b) \  ({ typeof (a) _a = (a); \ typeof (b) _b = (b); \ _a > _b ? _a : _b; })
-
-//AcciÃ³n que calcula y muestra cuales son las peliculas mas populares
+//Accion que calcula y muestra cuales son las peliculas mas populares
 void MasPopulares(Arreglo a){
 	printf("Proximamente tendremos esta funcionalidad :)\n");
 }
 
 void Inicializar(Lista **l){
-	//printf("ini1\n");
 	(*l)=malloc(sizeof(Lista));
 	(*l)->head=NULL;
-	//printf("ini2\n");
 }
 
 void Insertar(Lista **l, Movie a){
 	struct Nodo *aux=malloc(sizeof(struct Nodo));
 	aux->pelicula=a;
-	//printf("insertar1\n");
 	if ((*l)->head==NULL){
-		//printf("insertar2\n");
 		(*l)->head=aux;
 		aux->next=NULL;
-		printf("lista vacia\n");
 	}else{
-		//printf("insertar3\n");
 		aux->next=(*l)->head;
 		(*l)->head=aux;
 	}
 }
 
 void DeTxtALista(Lista **l, FILE *f){
-	//int maxLengthid=0,maxLengthtitulo=0,maxLengthdirector=0,maxLengthlikes=0,maxLengthctdvot=0,maxLengthvoto=0,maxLengthanio=0,maxLengthcosto=0;
 	char auxGenero[15];
 	char auxColor[10];
 	char auxID[8];
 	char auxLikes[8];
 	char auxCantidad_votantes[7];
-	char auxVoto_promedio[5] ;
+	char auxVoto_promedio[5];
 	char auxAnio[6];
 	char auxCosto[11];
 	Movie aux;
@@ -58,103 +39,145 @@ void DeTxtALista(Lista **l, FILE *f){
 	if(f == NULL ) {
     printf("No fue posible abrir el archivo\n");
    }
-   //printf("cargando pelicula\n");
 while (!feof(f)){
-	//printf("cargando 2\n");
-	fgets(auxID, sizeof(auxID), f);
+	fgets(auxID,8, f);
 	aux.id=atoi(auxID);
-	fgets(aux.titulo,(sizeof(aux.titulo)), f);
-	fgets(aux.director,(sizeof(aux.director)), f);
-
-	fgets(auxGenero,(sizeof(auxGenero)), f);
-	if (strcmp(auxGenero, "Action") == 0){
+	fgets(aux.titulo,56, f);
+	strtok(aux.titulo, "\n");
+	fgets(aux.director,34, f);
+	strtok(aux.director, "\n");
+	fgets(auxGenero,100, f);
+	if (strncmp("Action",auxGenero,strlen("Action"))==0){
 			aux.genero=Action;
-	}else if (strcmp(auxGenero, "Comedy") == 0){
+	}else if (strncmp("Comedy",auxGenero,strlen("Comedy"))==0){
 				aux.genero=Comedy;
-		}else if (strcmp(auxGenero, "Adventure") == 0){
+		}else if (strncmp("Adventure",auxGenero,strlen("Adventure"))==0){
 				aux.genero=Adventure;
-			}else if (strcmp(auxGenero, "Drama") == 0){
+			}else if (strncmp("Drama",auxGenero,strlen("Drama"))==0){
 					aux.genero=Drama;
-				}else if (strcmp(auxGenero, "Horror") == 0){
+				}else if (strncmp("Horror",auxGenero,strlen("Horror"))==0){
 					aux.genero=Horror;
-					}else if (strcmp(auxGenero, "Sci-Fi") == 0){
+					}else if (strncmp("Sci-Fi",auxGenero,strlen("Sci-Fi"))==0){
 						aux.genero=SciFi;
-						}else if (strcmp(auxGenero, "Fantasy") == 0){
+						}else if (strncmp("Fantasy",auxGenero,strlen("Fantasy"))==0){
 								aux.genero=Fantasy;
-							}else if (strcmp(auxGenero, "Animation") == 0){
+							}else if (strncmp("Animation",auxGenero,strlen("Animation"))==0){
 									aux.genero=Animation;
+								}else{
+									printf("--\n");
 								}
-
-	fgets(auxLikes, sizeof(auxLikes), f);
+	fgets(auxLikes,8, f);
 	aux.likes=atoi(auxLikes);
-	fgets(auxCantidad_votantes, sizeof(auxCantidad_votantes), f);
+	fgets(auxCantidad_votantes,7, f);
 	aux.cantidad_votantes=atoi(auxCantidad_votantes);
-	fgets(auxVoto_promedio, sizeof(auxVoto_promedio), f);
+	fgets(auxVoto_promedio,5, f);
 	aux.voto_promedio=atof(auxVoto_promedio);
-	fgets(auxAnio, sizeof(auxAnio), f);
+	fgets(auxAnio,6, f);
 	aux.anio=atoi(auxAnio);
-	fgets(auxCosto, sizeof(auxCosto), f);
+	fgets(auxCosto,11, f);
 	aux.costo=atoi(auxCosto);
 
-	fgets(auxColor,(sizeof(auxColor)), f);
-	if (strcmp(auxColor, "Color") == 0){
+	fgets(auxColor,10, f);
+	if (strncmp("Color",auxColor,strlen("Color"))==0){
 			aux.color=Color;
-	}else if (strcmp(auxColor, "BW") == 0){
+	}else if (strncmp("BW",auxColor,strlen("BW"))==0){
 				aux.color=BW;
 		}
 
-
-	//printf("txt1\n")
-/*
-	maxLengthid=new_max(maxLengthid,strlen(aux.id));
-	maxLengthtitulo=new_max(maxLengthtitulo,strlen(aux.titulo));
-	maxLengthdirector=new_max(maxLengthdirector,strlen(aux.director));
-	maxLengthlikes=new_max(maxLengthlikes,strlen(aux.likes));
-	maxLengthctdvot=new_max(maxLengthctdvot,strlen(aux.cantidad_votantes));
-	maxLengthvoto=new_max(maxLengthvoto,strlen(aux.voto_promedio));
-	maxLengthanio=new_max(maxLengthanio,strlen(aux.anio));
-	maxLengthcosto=new_max(maxLengthcosto,strlen(aux.costo));
-*/
 	Insertar(l, aux);
 }
   fclose(f);
-//  printf("%i %i %i %i %i %i %i %i\n", maxLengthid,maxLengthtitulo,maxLengthdirector,maxLengthlikes,maxLengthctdvot,maxLengthvoto,maxLengthanio,maxLengthcosto );
 }
 
-static char* obtenerGenero(enum generos g) 
+static char* obtenerGenero(generos g) 
 {
    switch (g) 
    {
-		case Action: return "Action"; break;
-		case Comedy: return "Comedy"; break;
-		case Adventure: return "Adventure"; break;
-		case Drama: return "Drama"; break;
-		case Horror: return "Horror"; break;
-		case SciFi: return "SciFi"; break;
-		case Fantasy: return "Fantasy"; break;
-		case Animation: return "Animation"; break;
-		default: printf("%i\n",g ); return "Defaul"; break;
+		case Action: return "Action"; 
+		break;
+		case Comedy: return "Comedy"; 
+		break;
+		case Adventure: return "Adventure"; 
+		break;
+		case Drama: return "Drama"; 
+		break;
+		case Horror: return "Horror"; 
+		break;
+		case SciFi: return "SciFi"; 
+		break;
+		case Fantasy: return "Fantasy"; 
+		break;
+		case Animation: return "Animation"; 
+		break;
+		default: printf("%i\n",g ); return "Defaul"; 
+		break;
    }
 }
 
 void MostrarLista(Lista *l){
 	struct Nodo *aux;
 	aux=l->head;
+	int i=1;
 	while(aux!=NULL){
+		printf("%i\n",i);
 		printf("\n");
 		printf("%i\n",aux->pelicula.id);
-		printf("%s",aux->pelicula.titulo);
-		printf("%s",aux->pelicula.director);
+		printf("%s\n",aux->pelicula.titulo);
+		printf("%s\n",aux->pelicula.director);
 		printf("%s\n",obtenerGenero(aux->pelicula.genero));
 		printf("%i\n",aux->pelicula.likes);
 		printf("%i\n",aux->pelicula.cantidad_votantes);
 		printf("%0.1f\n",aux->pelicula.voto_promedio);
 		printf("%i\n",aux->pelicula.anio);
 		printf("%i\n",aux->pelicula.costo);
-		printf("%d\n",aux->pelicula.color);
+		if (aux->pelicula.color==0){
+			printf("Color\n");
+		}else{
+			printf("BW\n");
+		}
 		printf("\n");
 		printf("------------------------\n");
-		printf("\n");
 		aux=aux->next;
+		i++;
+	}
+}
+
+void DeListaAArreglo(Lista **l,Arreglo arr){
+	struct Nodo *aux=malloc(sizeof(struct Nodo));
+	aux=(*l)->head;
+	for (int i=1;i<=SIZE;i++){
+		arr.peliculas[i].id=aux->pelicula.id;
+		strcpy(arr.peliculas[i].titulo,aux->pelicula.titulo);
+		strcpy(arr.peliculas[i].director,aux->pelicula.director);
+		arr.peliculas[i].genero=aux->pelicula.genero;
+		arr.peliculas[i].likes=aux->pelicula.likes;
+		arr.peliculas[i].cantidad_votantes=aux->pelicula.cantidad_votantes;
+		arr.peliculas[i].voto_promedio=aux->pelicula.voto_promedio;
+		arr.peliculas[i].anio=aux->pelicula.anio;
+		arr.peliculas[i].costo=aux->pelicula.costo;
+		arr.peliculas[i].color=aux->pelicula.color;
+		aux=aux->next;
+
+/*
+		MOSTRAR ARREGLO
+*/
+		// printf("%i\n",i);
+		// printf("\n");
+		// printf("%i\n",arr.peliculas[i].id);
+		// printf("%s\n",arr.peliculas[i].titulo);
+		// printf("%s\n",arr.peliculas[i].director);
+		// printf("%s\n",obtenerGenero(arr.peliculas[i].genero));
+		// printf("%i\n",arr.peliculas[i].likes);
+		// printf("%i\n",arr.peliculas[i].cantidad_votantes);
+		// printf("%0.1f\n",arr.peliculas[i].voto_promedio);
+		// printf("%i\n",arr.peliculas[i].anio);
+		// printf("%i\n",arr.peliculas[i].costo);
+		// if (arr.peliculas[i].color==0){
+		// 	printf("Color\n");
+		// }else{
+		// 	printf("BW\n");
+		// }
+		// printf("\n");
+		// printf("------------------------\n");
 	}
 }
